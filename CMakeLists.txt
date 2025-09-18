@@ -316,6 +316,12 @@ if(ENABLE_GLSLANG_BINARIES)
     add_subdirectory(StandAlone)
 endif()
 
+# Export targets for CPM/FetchContent usage (makes targets available without installation)
+# This must come after the subdirectories that create the export targets
+if(TARGET glslang AND TARGET glslang-default-resource-limits)
+    export(EXPORT glslang-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/glslang-targets.cmake" NAMESPACE glslang::)
+endif()
+
 if(GLSLANG_TESTS)
     enable_testing()
     add_subdirectory(gtests)
@@ -398,6 +404,3 @@ if (GLSLANG_ENABLE_INSTALL)
             "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
     )
 endif()
-
-# Export targets for CPM/FetchContent usage (makes targets available without installation)
-export(EXPORT glslang-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/glslang-targets.cmake" NAMESPACE glslang::)
