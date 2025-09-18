@@ -398,3 +398,6 @@ if (GLSLANG_ENABLE_INSTALL)
             "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
     )
 endif()
+
+# Export targets for CPM/FetchContent usage (makes targets available without installation)
+export(EXPORT glslang-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/glslang-targets.cmake" NAMESPACE glslang::)
